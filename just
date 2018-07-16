@@ -8,12 +8,12 @@ UNDERLINE='\033[4m'
 NOUNDERLINE='\033[24m'
 
 build() {
-  docker build -t connect-platform .
+  docker build -t loreanvictor/connect-platform .
 }
 
 run() {
   kill
-  docker run -dit --name connect-platform -p 4000:4000 connect-platform
+  docker run -dit --name connect-platform -p 4000:4000 loreanvictor/connect-platform
   echo -e "${CYAN}server operational.${NOCOL}"
   echo -e "${UNDERLINE}localhost:4000/panel/${NOUNDERLINE}"
 }
@@ -29,10 +29,15 @@ shell() {
 
 clean() {
   kill
-  docker rmi connect-platform -f
+  docker rmi loreanvictor/connect-platform -f
 }
 
-if [[ "$1" =~ ^(build|run|kill|shell|clean)$ ]]; then
+push() {
+  build
+  docker push loreanvictor/connect-platform
+}
+
+if [[ "$1" =~ ^(build|run|kill|shell|clean|push)$ ]]; then
   echo -e "${YELLOW}WARNING: ${CYAN} this is for development/testing purposes. ${NOCOL}"
   $1
 else
