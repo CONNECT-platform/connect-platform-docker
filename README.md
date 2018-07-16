@@ -1,5 +1,5 @@
 # connect-platform-docker
-docker file (and a testing/quick deploying script) for connect-platform.
+docker file (and a testing/quick deploying script) for [CONNECT platform](https://loreanvictor.github.io/connect-platform/).
 for building the image and running it, just do the following:
 1. make sure you have [docker engine installed](https://www.docker.com/community-edition).
 1. create a folder and `cd` there.
