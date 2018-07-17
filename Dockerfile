@@ -13,7 +13,10 @@ WORKDIR /app/
 #
 # lets get the starter boilerplate project
 #
-RUN git clone https://github.com/loreanvictor/connect-platform-biolerplate.git .
+RUN git clone https://github.com/loreanvictor/connect-platform-boilerplate.git
+RUN cp ./connect-platform-boilerplate/index.js .
+RUN cp ./connect-platform-boilerplate/package.json .
+RUN rm -fr ./connect-platform-boilerplate
 
 #
 # lets now install all dependencies
