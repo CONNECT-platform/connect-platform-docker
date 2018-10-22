@@ -30,7 +30,7 @@ run() {
           -v $(pwd)/panel-generated:/app/panel-generated \
           -v $(pwd)/secure:/app/secure \
           --env CONNECT_INSTALL_EXTERNAL_PACKAGES=true \
-          --env CONNECT_PANEL_SECRET=$1 \  
+          --env CONNECT_PANEL_SECRET=$1 \
           loreanvictor/connect-platform
   fi
   echo -e "${CYAN}server operational.${NOCOL}"
