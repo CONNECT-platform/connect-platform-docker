@@ -10,7 +10,7 @@ LABEL maintainer="eugene ghanizadeh khoub <ghanizadeh.eugene@gmail.com>"
 # semver is not particularly applicable to docker images but you
 # get the idea on how to control this.
 #
-RUN echo "CONNECT platform Dockerfile v 0.1.6"
+RUN echo "CONNECT platform Dockerfile v 0.1.7"
 
 #
 # obviously, lets work in this simple folder.
