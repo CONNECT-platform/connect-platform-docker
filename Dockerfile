@@ -18,6 +18,23 @@ RUN echo "CONNECT platform Dockerfile v 0.1.11"
 WORKDIR /app/
 
 #
+# lets create the user to work with.
+#
+RUN groupadd lebowski && useradd -g lebowski -m jeff
+RUN chown -R jeff:lebowski /app
+
+#
+# also create the logs folder and give jeff the access to them.
+#
+RUN mkdir /var/log/platform
+RUN chown -R jeff:lebowski /var/log/platform
+
+#
+# and keep on working as jeff from this point on.
+#
+USER jeff
+
+#
 # lets get the starter boilerplate project
 #
 RUN git clone https://github.com/loreanvictor/connect-platform-boilerplate.git
@@ -40,4 +57,4 @@ EXPOSE 4000
 #
 # start the server
 #
-CMD ["npm", "start"]
+CMD ["/bin/sh", "-c", "npm start >>/var/log/platform/out.log 2>>/var/log/platform/err.log"]
