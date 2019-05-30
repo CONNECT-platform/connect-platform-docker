@@ -1,16 +1,21 @@
 #
 # start from Nodejs v8
 #
-FROM node:8
+FROM node:8-alpine
 
 LABEL maintainer="eugene ghanizadeh khoub <ghanizadeh.eugene@gmail.com>"
 
 #
-# for making a clean new build, just increase the version here.
-# semver is not particularly applicable to docker images but you
-# get the idea on how to control this.
+# get some basic dependencies.
+# - bash and ttyd are used for remote shell access
+# - tini for its awesomeness
+# - git for getting connect-platform-boilerplate codes
 #
-RUN echo "CONNECT platform Dockerfile v 0.1.11"
+RUN apk add --no-cache \
+    bash \
+    tini \
+    ttyd \
+    git
 
 #
 # obviously, lets work in this simple folder.
@@ -20,7 +25,7 @@ WORKDIR /app/
 #
 # lets create the user to work with.
 #
-RUN groupadd lebowski && useradd -g lebowski -m jeff
+RUN addgroup lebowski && adduser -G lebowski -D jeff
 RUN chown -R jeff:lebowski /app
 
 #
@@ -33,6 +38,17 @@ RUN chown -R jeff:lebowski /var/log/platform
 # and keep on working as jeff from this point on.
 #
 USER jeff
+
+#
+# for making a clean new build, just increase the version here.
+# semver is not particularly applicable to docker images but you
+# get the idea on how to control this.
+#
+# note that this is placed after installing general dependencies
+# and setting up the user as it should be mainly used to control
+# the connect-platform version.
+#
+RUN echo "CONNECT platform Dockerfile v 0.1.12"
 
 #
 # lets get the starter boilerplate project
@@ -50,11 +66,17 @@ RUN rm -fr ./connect-platform-boilerplate
 RUN npm install
 
 #
-# expose the proper port
+# expose the proper ports
 #
 EXPOSE 4000
 
 #
+# set some default configuration for the platform
+#
+ENV CONNECT_REMOTE_SHELL_ENABLED=true
+
+#
 # start the server
 #
+ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["/bin/sh", "-c", "npm start >>/var/log/platform/out.log 2>>/var/log/platform/err.log"]
