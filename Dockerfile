@@ -66,6 +66,8 @@ RUN rm -fr ./connect-platform-boilerplate
 #
 RUN mkdir ./panel-generated/
 RUN mkdir ./secure/
+VOLUME /app/panel-generated/
+VOLUME /app/secure/
 
 #
 # lets now install all dependencies
