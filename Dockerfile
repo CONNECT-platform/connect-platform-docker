@@ -27,6 +27,7 @@ WORKDIR /app/
 #
 RUN addgroup lebowski && adduser -G lebowski -D jeff
 RUN chown -R jeff:lebowski /app
+RUN chmod g+s /app
 
 #
 # also create the logs folder and give jeff the access to them.
@@ -59,6 +60,12 @@ RUN cp ./connect-platform-boilerplate/package.json .
 RUN cp ./connect-platform-boilerplate/nodemon.json .
 RUN cp ./connect-platform-boilerplate/run.js .
 RUN rm -fr ./connect-platform-boilerplate
+
+#
+# also create some necessary folders
+#
+RUN mkdir ./panel-generated/
+RUN mkdir ./secure/
 
 #
 # lets now install all dependencies
