@@ -49,7 +49,7 @@ USER jeff
 # and setting up the user as it should be mainly used to control
 # the connect-platform version.
 #
-RUN echo "CONNECT platform Dockerfile v 0.1.12"
+RUN echo "CONNECT platform Dockerfile v 0.1.13"
 
 #
 # lets get the starter boilerplate project
@@ -59,6 +59,7 @@ RUN cp ./connect-platform-boilerplate/index.js .
 RUN cp ./connect-platform-boilerplate/package.json .
 RUN cp ./connect-platform-boilerplate/nodemon.json .
 RUN cp ./connect-platform-boilerplate/run.js .
+RUN cp -r ./connect-platform-boilerplate/samples .
 RUN rm -fr ./connect-platform-boilerplate
 
 #
