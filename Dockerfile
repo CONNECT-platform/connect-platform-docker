@@ -30,12 +30,6 @@ RUN chown -R jeff:lebowski /app
 RUN chmod g+s /app
 
 #
-# also create the logs folder and give jeff the access to them.
-#
-RUN mkdir /var/log/platform
-RUN chown -R jeff:lebowski /var/log/platform
-
-#
 # and keep on working as jeff from this point on.
 #
 USER jeff
@@ -49,7 +43,7 @@ USER jeff
 # and setting up the user as it should be mainly used to control
 # the connect-platform version.
 #
-RUN echo "CONNECT platform Dockerfile v 0.1.13"
+RUN echo "CONNECT platform Dockerfile v 0.1.14"
 
 #
 # lets get the starter boilerplate project
@@ -89,4 +83,4 @@ ENV CONNECT_REMOTE_SHELL_ENABLED=true
 # start the server
 #
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD ["/bin/sh", "-c", "npm start >>/var/log/platform/out.log 2>>/var/log/platform/err.log"]
+CMD ["/bin/sh", "-c", "npm start"]
