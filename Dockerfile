@@ -43,7 +43,7 @@ USER jeff
 # and setting up the user as it should be mainly used to control
 # the connect-platform version.
 #
-RUN echo "CONNECT platform Dockerfile v 0.1.14"
+RUN echo "CONNECT platform Dockerfile v 0.1.15"
 
 #
 # lets get the starter boilerplate project
